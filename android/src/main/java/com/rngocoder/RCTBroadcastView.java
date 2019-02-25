@@ -120,4 +120,3 @@ public class RCTBroadcastView extends ViewGroupManager<BroadcastView>  {
 
 
 }
-
