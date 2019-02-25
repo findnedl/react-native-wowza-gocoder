@@ -97,6 +97,9 @@ public class BroadcastManager {
     }
 
     private static int getOrientationBehavior(String orientation) {
+        if (orientation == null) {
+              orientation = "";
+        }
         switch (orientation) {
             case "landscape":
                 return WOWZMediaConfig.ALWAYS_LANDSCAPE;
