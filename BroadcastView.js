@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
 export default class BroadcastView extends Component {
 
   setNativeProps(nativeProps) {
+    console.log(nativeProps);
     this._root.setNativeProps(nativeProps);
   }
   componentWillMount(){
