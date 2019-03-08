@@ -15,18 +15,21 @@ import com.wowza.gocoder.sdk.api.status.WOWZStatusCallback;
 
 public class BroadcastManager {
     public static WOWZBroadcastConfig initBroadcast(Context localContext, String hostAddress, String applicationName, String broadcastName, String sdkLicenseKey, String username, String password,int sizePreset, String videoOrientation, WOWZCameraView cameraView, WOWZAudioDevice audioDevice){
+        WOWZLog.LOGGING_ENABLED = true;
         WowzaGoCoder.init(localContext, sdkLicenseKey);
+
         WOWZBroadcastConfig broadcastConfig = new WOWZBroadcastConfig();
-        broadcastConfig.setOrientationBehavior(getOrientationBehavior(videoOrientation));
-        broadcastConfig.setVideoFramerate(12);
+        //commenting out camera logic
+//        broadcastConfig.setOrientationBehavior(getOrientationBehavior(videoOrientation));
+//        broadcastConfig.setVideoFramerate(12);
 
-        WOWZMediaConfig mediaConfig = getSizePresetWithInt(sizePreset);
-        broadcastConfig.setVideoSourceConfig(mediaConfig);
-
-        broadcastConfig.setVideoBroadcaster(cameraView);
+//        WOWZMediaConfig mediaConfig = getSizePresetWithInt(sizePreset);
+//        broadcastConfig.setVideoSourceConfig(mediaConfig);
+        broadcastConfig.setVideoEnabled(false);
+//        broadcastConfig.setVideoBroadcaster(cameraView);
         broadcastConfig.setAudioBroadcaster(audioDevice);
         broadcastConfig.setAudioBitRate(22400);
-
+        broadcastConfig.setAudioEnabled(true);
         broadcastConfig.setHostAddress(hostAddress);
         broadcastConfig.setUsername(username);
         broadcastConfig.setPassword(password);
@@ -98,7 +101,7 @@ public class BroadcastManager {
 
     private static int getOrientationBehavior(String orientation) {
         if (orientation == null) {
-              orientation = "";
+            orientation = "";
         }
         switch (orientation) {
             case "landscape":

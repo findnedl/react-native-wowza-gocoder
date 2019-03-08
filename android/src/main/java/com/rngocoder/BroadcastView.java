@@ -72,12 +72,14 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
         localContext = context;
         mEventEmitter = localContext.getJSModule(RCTEventEmitter.class);
         audioDevice = new WOWZAudioDevice();
-        cameraView = new WOWZCameraView(context);
+        //don't need camera for this
+//        cameraView = new WOWZCameraView(context);
+//        cameraView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+//        cameraView.getCamera().setTorchOn(false);
+//        this.addView(cameraView);
         broadcast = new WOWZBroadcast();
         localContext.addLifecycleEventListener(this);
-        cameraView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        cameraView.getCamera().setTorchOn(false);
-        this.addView(cameraView);
+
     }
 
     @Override
@@ -96,7 +98,7 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
 
     @Override
     public void onHostResume() {
-        if(broadcastConfig == null && cameraView != null) {
+        if(broadcastConfig == null) {
             broadcastConfig = BroadcastManager.initBroadcast(localContext, getHostAddress(), getApplicationName(), getBroadcastName(), getSdkLicenseKey(), getUsername(), getPassword(), getSizePreset(), getVideoOrientation(), cameraView, audioDevice);
         }
 
@@ -116,7 +118,8 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
 
 
     public void setCameraType(Integer cameraType) {
-        this.cameraView.setCamera(cameraType);
+//        commenting out camera logic
+//        this.cameraView.setCamera(cameraType);
     }
 
     public void setFlash(boolean flag) {
@@ -124,8 +127,9 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
     }
 
     public void stopCamera() {
-        this.cameraView.stopPreview();
-        this.cameraView = null;
+//        commenting out camera logic
+//        this.cameraView.stopPreview();
+//        this.cameraView = null;
     }
 
 
@@ -200,9 +204,9 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
 
     public void setBroadcasting(boolean broadcasting) {
 
-        WOWZCamera activeCamera = this.cameraView.getCamera();
-        if (activeCamera != null && activeCamera.hasCapability(WOWZCamera.FOCUS_MODE_CONTINUOUS))
-            activeCamera.setFocusMode(WOWZCamera.FOCUS_MODE_CONTINUOUS);
+//        WOWZCamera activeCamera = this.cameraView.getCamera();
+//        if (activeCamera != null && activeCamera.hasCapability(WOWZCamera.FOCUS_MODE_CONTINUOUS))
+//            activeCamera.setFocusMode(WOWZCamera.FOCUS_MODE_CONTINUOUS);
 
         if(broadcastConfig == null){
             return;
